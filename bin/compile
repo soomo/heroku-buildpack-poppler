@@ -13,6 +13,7 @@ mkdir -p $CACHE_DIR
 if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   echo "-----> building Fontconfig buildpack binaries"
   cd $CACHE_DIR
+  echo $CACHE_DIR/$FILE_NAME
   curl http://www.freedesktop.org/software/fontconfig/release/$FILE_NAME > $CACHE_DIR/$FILE_NAME
   cd $FILE_NAME
   tar -xzf $FILE_NAME
@@ -22,6 +23,7 @@ fi
 
 echo "-----> Extracting Fontconfig binaries"
 mkdir -p $BUILD_DIR/vendor/fontconfig
+echo "$BUILD_DIR/vendor/fontconfig"
 cp -rf $CACHE_DIR/$FILE_NAME -C $BUILD_DIR/vendor/fontconfig
 
 # Poppler
