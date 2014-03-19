@@ -41,7 +41,7 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   tar -xzf $FILE_NAME
   cd "poppler-${VERSION}"
   echo "FONTCONFIG_LIBS=\"-L/$BUILD_DIR/vendor/fontconfig/src/.libs/ -lfontconfig\" FONTCONFIG_CFLAGS=\"-I/${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/\" ./configure"
-  FONTCONFIG_LIBS="-L/$BUILD_DIR/vendor/fontconfig/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/" ./configure
+  FONTCONFIG_LIBS="-L/${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/" ./configure
   make
 fi
 
