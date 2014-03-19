@@ -15,8 +15,8 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   cd $CACHE_DIR
   echo $CACHE_DIR/$FILE_NAME
   curl http://www.freedesktop.org/software/fontconfig/release/$FILE_NAME > $CACHE_DIR/$FILE_NAME
-  cd $FILE_NAME
   tar -xzf $FILE_NAME
+  cd $FILE_NAME
   ./configure
   make
 fi
@@ -38,8 +38,8 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
 
   cd $CACHE_DIR
   curl http://poppler.freedesktop.org/$FILE_NAME > $CACHE_DIR/$FILE_NAME
-  cd $FILE_NAME
   tar -xzf $FILE_NAME
+  cd $FILE_NAME
   FONTCONFIG_LIBS="-L/$BUILD_DIR/vendor/fontconfig/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/app/fontconfig-$FONTCONFIG_VERSION/" ./configure
   make
 fi
