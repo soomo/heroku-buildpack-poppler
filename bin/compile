@@ -24,7 +24,7 @@ fi
 echo "-----> Extracting Fontconfig binaries"
 mkdir -p $BUILD_DIR/vendor/fontconfig
 echo "$BUILD_DIR/vendor/fontconfig"
-cp -rf $CACHE_DIR/$FILE_NAME -C $BUILD_DIR/vendor/fontconfig
+cp -rf $CACHE_DIR/$FILE_NAME $BUILD_DIR/vendor/fontconfig
 
 # Poppler
 VERSION="0.22.0"
@@ -46,7 +46,7 @@ fi
 
 echo "-----> Extracting Poppler binaries"
 mkdir -p $BUILD_DIR/vendor/poppler
-cp -rf $CACHE_DIR/$FILE_NAME -C $BUILD_DIR/vendor/poppler
+cp -rf "${$CACHE_DIR}/poppler-${VERSION}" $BUILD_DIR/vendor/poppler
 
 echo "-----> Linking binaries"
 mkdir -p $BUILD_DIR/bin
