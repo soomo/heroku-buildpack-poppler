@@ -41,7 +41,7 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   tar -xzf $FILE_NAME
   cd "poppler-${VERSION}"
   DISABLED="--disable-abiword-output --disable-gtk-test --disable-poppler-qt --disable-poppler-qt4 --disable-splash-output --disable-gdk"
-  FONTCONFIG_LIBS="-L/${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/" ./configure --enable-static $DISABLE
+  FONTCONFIG_LIBS="-L/${VENDOR_URL}/fontconfig/fontconfig-${FONTCONFIG_VERSION}/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/${VENDOR_URL}/fontconfig/fontconfig-${FONTCONFIG_VERSION}/" ./configure --enable-static $DISABLE
   make
 fi
 
