@@ -40,7 +40,8 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   curl http://poppler.freedesktop.org/$FILE_NAME > $CACHE_DIR/$FILE_NAME
   tar -xzf $FILE_NAME
   cd "poppler-${VERSION}"
-  FONTCONFIG_LIBS="-L/${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/" ./configure --enable-static
+  DISABLED="--disable-abiword-output --disable-gtk-test --disable-poppler-qt --disable-poppler-qt4 --disable-splash-output --disable-gdk"
+  FONTCONFIG_LIBS="-L/${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/" ./configure --enable-static $DISABLE
   make
 fi
 
@@ -51,4 +52,4 @@ cp -rf $CACHE_DIR/poppler-$VERSION $BUILD_DIR/vendor/poppler
 echo "-----> Linking binaries"
 mkdir -p $BUILD_DIR/bin
 cd $BUILD_DIR/bin
-ln -s ../vendor/poppler/poppler-$VERSION/bin/pdftohtml .
+ln -s ../vendor/poppler/poppler-$VERSION/utils/pdftohtml .
