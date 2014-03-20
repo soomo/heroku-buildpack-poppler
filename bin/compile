@@ -29,19 +29,16 @@ cp -rf "${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/" $BUILD_DIR/vendor/fontco
 # Poppler
 VERSION="0.22.0"
 FILE_NAME="poppler-${VERSION}.tar.gz"
-BUILDPACK_PACKAGE="${VENDOR_URL}/${FILE_NAME}"
 
 mkdir -p $CACHE_DIR
 if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   echo "-----> building Poppler buildpack binaries"
-  #curl $BUILDPACK_PACKAGE -s -o $CACHE_DIR/$FILE_NAME
-
   cd $CACHE_DIR
   curl http://poppler.freedesktop.org/$FILE_NAME > $CACHE_DIR/$FILE_NAME
   tar -xzf $FILE_NAME
   cd "poppler-${VERSION}"
   DISABLED="--disable-abiword-output --disable-gtk-test --disable-poppler-qt --disable-poppler-qt4 --disable-splash-output --disable-gdk"
-  FONTCONFIG_LIBS="-L/${VENDOR_URL}/fontconfig/fontconfig-${FONTCONFIG_VERSION}/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/${VENDOR_URL}/fontconfig/fontconfig-${FONTCONFIG_VERSION}/" ./configure --enable-static $DISABLE
+  FONTCONFIG_LIBS="-L/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/" ./configure --enable-static $DISABLE
   make
 fi
 
