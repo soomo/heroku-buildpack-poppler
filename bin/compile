@@ -28,7 +28,7 @@ cp -rf "${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/" $BUILD_DIR/vendor/fontco
 
 # Poppler
 VERSION="0.26.5"
-FILE_NAME="poppler-${VERSION}.tar.gz"
+FILE_NAME="poppler-${VERSION}.tar.xz"
 
 mkdir -p $CACHE_DIR
 if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
