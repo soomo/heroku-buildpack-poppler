@@ -27,7 +27,7 @@ echo "cp -rf \"${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/*\" $BUILD_DIR/vend
 cp -rf "${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/" $BUILD_DIR/vendor/fontconfig
 
 # Poppler
-VERSION="0.26.5"
+VERSION="0.28.1"
 FILE_NAME="poppler-${VERSION}.tar.xz"
 
 mkdir -p $CACHE_DIR
