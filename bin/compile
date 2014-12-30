@@ -51,3 +51,4 @@ mkdir -p $BUILD_DIR/bin
 cd $BUILD_DIR/bin
 ln -s ../vendor/poppler/poppler-$VERSION/utils/pdftohtml .
 ln -s ../vendor/poppler/poppler-$VERSION/utils/pdftotext .
+ln -s ../vendor/poppler/poppler-$VERSION/utils/pdfinfo .
