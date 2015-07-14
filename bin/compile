@@ -40,13 +40,15 @@ function vendor() {
   export LD_LIBRARY_PATH="$path/lib:$LD_LIBRARY_PATH"
 }
 
+vendor "https://s3.amazonaws.com/mojodna-heroku/$STACK/pango-1.36.8-1.tar.gz"  "$BUILD_DIR/vendor/pango"
+vendor "https://s3.amazonaws.com/mojodna-heroku/$STACK/harfbuzz-0.9.39-1.tar.gz"  "$BUILD_DIR/vendor/harfbuzz"
 vendor "https://s3.amazonaws.com/mojodna-heroku/$STACK/freetype-2.5.5-1.tar.gz" "$BUILD_DIR/vendor/freetype"
 vendor "https://s3.amazonaws.com/mojodna-heroku/$STACK/fontconfig-2.11.93-1.tar.gz"  "$BUILD_DIR/vendor/fontconfig"
 
-echo "-----> Tweaking FreeType include path"
+echo "-----> Tweaking Pango and FreeType include paths"
 
-export CPPPATH="$BUILD_DIR/vendor/freetype/include/freetype2:$CPPPATH"
-export CPATH="$BUILD_DIR/vendor/freetype/include/freetype2:$CPATH"
+export CPPPATH="$BUILD_DIR/vendor/freetype/include/freetype2:$BUILD_DIR/vendor/pango/include/pango-1.0:$CPPPATH"
+export CPATH="$BUILD_DIR/vendor/freetype/include/freetype2:$BUILD_DIR/vendor/pango/include/pango-1.0:$CPATH"
 
 echo "-----> Configuring build environment"
 
