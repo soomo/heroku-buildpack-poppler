@@ -62,7 +62,7 @@ export CPATH="\$CPATH:$CPATH"
 EOF
 
 # Poppler
-VERSION="0.34.0"
+VERSION="0.30.0"
 FILE_NAME="poppler-${VERSION}.tar.xz"
 
 mkdir -p $CACHE_DIR
