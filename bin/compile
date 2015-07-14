@@ -37,8 +37,8 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   curl http://poppler.freedesktop.org/$FILE_NAME > $CACHE_DIR/$FILE_NAME
   tar -xJf $FILE_NAME
   cd "poppler-${VERSION}"
-  DISABLED="--disable-abiword-output --disable-gtk-test --disable-poppler-qt --disable-poppler-qt4 --disable-splash-output --disable-gdk --disable-libjpeg --disable-libpng --enable-libopenjpeg=none"
-  FONTCONFIG_LIBS="-L/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/" ./configure --enable-static=yes --enable-shared=no $DISABLE
+  DISABLED="--disable-abiword-output --disable-gtk-test --disable-poppler-qt --disable-poppler-qt4 --disable-splash-output --disable-gdk"
+  FONTCONFIG_LIBS="-L/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/" ./configure --enable-static=yes --enable-shared=no --enable-libopenjpeg=none $DISABLE
   make
 fi
 
