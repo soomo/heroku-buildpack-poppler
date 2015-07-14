@@ -4,17 +4,6 @@ set -e
 
 BUILD_DIR=$1
 CACHE_DIR=$2
-SOURCE_LIST=`dirname $0`/../etc/sources.list
-BIN_PATH=.apt/usr/bin
-LIB_PATH=.apt/usr/lib/x86_64-linux-gnu/
-
-indent() {
-  sed -u 's/^/       /'
-}
-
-arrow() {
-  sed -u 's/^/-----> /'
-}
 
 # Fontconfig
 FONTCONFIG_VERSION="2.10.2"
@@ -37,24 +26,6 @@ mkdir -p $BUILD_DIR/vendor/fontconfig
 echo "cp -rf \"${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/*\" $BUILD_DIR/vendor/fontconfig"
 cp -rf "${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/" $BUILD_DIR/vendor/fontconfig
 
-APT_CACHE_DIR="$CACHE_DIR/apt/cache"
-APT_STATE_DIR="$CACHE_DIR/apt/state"
-
-mkdir -p "$APT_CACHE_DIR/archives/partial"
-mkdir -p "$APT_STATE_DIR/lists/partial"
-
-APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state=$APT_STATE_DIR -o Dir::Etc::SourceList=$SOURCE_LIST"
-
-apt-get $APT_OPTIONS update | indent
-
-apt-get $APT_OPTIONS -y -d install libopenjpeg-dev | indent
-
-mkdir -p $BUILD_DIR/.apt
-
-for DEB in $(ls -1 $APT_CACHE_DIR/archives/*.deb); do
-  dpkg -x $DEB $BUILD_DIR/.apt/
-done
-
 # Poppler
 VERSION="0.34.0"
 FILE_NAME="poppler-${VERSION}.tar.xz"
@@ -66,7 +37,7 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   curl http://poppler.freedesktop.org/$FILE_NAME > $CACHE_DIR/$FILE_NAME
   tar -xJf $FILE_NAME
   cd "poppler-${VERSION}"
-  DISABLED="--disable-abiword-output --disable-gtk-test --disable-poppler-qt --disable-poppler-qt4 --disable-splash-output --disable-gdk"
+  DISABLED="--disable-abiword-output --disable-gtk-test --disable-poppler-qt --disable-poppler-qt4 --disable-splash-output --disable-gdk --disable-libjpeg --disable-libpng"
   FONTCONFIG_LIBS="-L/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/" ./configure --enable-static=yes --enable-shared=no $DISABLE
   make
 fi
