@@ -27,7 +27,7 @@ echo "cp -rf \"${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/*\" $BUILD_DIR/vend
 cp -rf "${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/" $BUILD_DIR/vendor/fontconfig
 
 # Poppler
-VERSION="0.30.0"
+VERSION="0.37.0"
 FILE_NAME="poppler-${VERSION}.tar.xz"
 
 mkdir -p $CACHE_DIR
@@ -38,7 +38,7 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   tar -xJf $FILE_NAME
   cd "poppler-${VERSION}"
   DISABLED="--disable-abiword-output --disable-gtk-test --disable-poppler-qt --disable-poppler-qt4 --disable-splash-output --disable-gdk"
-  FONTCONFIG_LIBS="-L/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/" ./configure --enable-static=yes --enable-shared=no --enable-libopenjpeg=none $DISABLE
+  FONTCONFIG_LIBS="-L/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/" ./configure --enable-static=yes --enable-shared=no $DISABLE
   make
 fi
 
