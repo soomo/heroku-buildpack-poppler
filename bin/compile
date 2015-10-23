@@ -38,7 +38,8 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   tar -xJf $FILE_NAME
   cd "poppler-${VERSION}"
   DISABLED="--disable-abiword-output --disable-gtk-test --disable-poppler-qt --disable-poppler-qt4 --disable-splash-output --disable-gdk"
-  FONTCONFIG_LIBS="-L/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/" ./configure --enable-static=yes --enable-shared=no $DISABLE
+  FREETYPE_CONFIG=freetype-config
+  FONTCONFIG_LIBS="-L/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/src/.libs/ -lfontconfig" FONTCONFIG_CFLAGS="-I/${BUILD_DIR}/vendor/fontconfig/fontconfig-${FONTCONFIG_VERSION}/" FREETYPE_LIBS=`$FREETYPE_CONFIG --libs` FREETYPE_CFLAGS=`$FREETYPE_CONFIG --cflags` ./configure --enable-static=yes --enable-shared=no $DISABLE
   make
 fi
 
