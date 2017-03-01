@@ -49,7 +49,7 @@ echo "-----> Extracting Poppler binaries"
 #mkdir -p $BUILD_DIR/vendor/poppler
 #cp -rf $CACHE_DIR/poppler-$VERSION $BUILD_DIR/vendor/poppler
 mkdir -p $BUILD_DIR/vendor/poppler/utils
-cp -f $CACHE_DIR/poppler-$VERSION/utils/pdftops $BUILD_DIR/vendor/poppler/utils/pdftops
+cp -f $CACHE_DIR/poppler-$VERSION/utils/pdftops $BUILD_DIR/vendor/poppler/poppler-$VERSION/utils/pdftops
 
 echo "-----> Linking binaries"
 mkdir -p $BUILD_DIR/bin
