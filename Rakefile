@@ -7,7 +7,7 @@ desc "download Fontconfig"
 task "fontconfig:download", :version do |t, args|
   version = args[:version]
 
-  sh "curl http://www.freedesktop.org/software/fontconfig/release/fontconfig-#{version}.tar.gz -s -o - | tar vzxf -"
+  sh "curl https://www.freedesktop.org/software/fontconfig/release/fontconfig-#{version}.tar.gz -s -o - | tar vzxf -"
 end
 
 desc "install Fontconfig"
@@ -32,7 +32,7 @@ desc "download Poppler"
 task "poppler:download", :version do |t, args|
   version = args[:version]
 
-  sh "curl http://poppler.freedesktop.org/poppler-#{version}.tar.gz -s -o - | tar vzxf -"
+  sh "curl https://poppler.freedesktop.org/poppler-#{version}.tar.gz -s -o - | tar vzxf -"
 end
 
 desc "install Poppler"

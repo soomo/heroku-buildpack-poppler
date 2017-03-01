@@ -14,7 +14,8 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   echo "-----> building Fontconfig buildpack binaries"
   cd $CACHE_DIR
   echo $CACHE_DIR/$FILE_NAME
-  curl http://www.freedesktop.org/software/fontconfig/release/$FILE_NAME > $CACHE_DIR/$FILE_NAME
+  echo "https://www.freedesktop.org/software/fontconfig/release/$FILE_NAME"
+  curl https://www.freedesktop.org/software/fontconfig/release/$FILE_NAME > $CACHE_DIR/$FILE_NAME
   tar -xzf $FILE_NAME
   cd "fontconfig-${FONTCONFIG_VERSION}"
   ./configure
@@ -34,7 +35,8 @@ mkdir -p $CACHE_DIR
 if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   echo "-----> building Poppler buildpack binaries"
   cd $CACHE_DIR
-  curl http://poppler.freedesktop.org/$FILE_NAME > $CACHE_DIR/$FILE_NAME
+  echo "https://poppler.freedesktop.org/$FILE_NAME"
+  curl https://poppler.freedesktop.org/$FILE_NAME > $CACHE_DIR/$FILE_NAME
   tar -xJf $FILE_NAME
   cd "poppler-${VERSION}"
   DISABLED="--disable-abiword-output --disable-gtk-test --disable-poppler-qt --disable-poppler-qt4 --disable-splash-output --disable-gdk"
