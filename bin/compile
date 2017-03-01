@@ -47,12 +47,18 @@ fi
 
 echo "-----> Extracting Poppler binaries"
 mkdir -p $BUILD_DIR/vendor/poppler
-cp -rf $CACHE_DIR/poppler-$VERSION $BUILD_DIR/vendor/poppler
+#cp -rf $CACHE_DIR/poppler-$VERSION $BUILD_DIR/vendor/poppler
+cp -f $CACHE_DIR/poppler-$VERSION/utils/pdftops $BUILD_DIR/vendor/poppler/utils/pdftops
 
 echo "-----> Linking binaries"
 mkdir -p $BUILD_DIR/bin
 cd $BUILD_DIR/bin
-ln -s ../vendor/poppler/poppler-$VERSION/utils/pdftohtml .
 ln -s ../vendor/poppler/poppler-$VERSION/utils/pdftops .
-ln -s ../vendor/poppler/poppler-$VERSION/utils/pdftotext .
-ln -s ../vendor/poppler/poppler-$VERSION/utils/pdfinfo .
+#ln -s ../vendor/poppler/poppler-$VERSION/utils/pdftohtml .
+#ln -s ../vendor/poppler/poppler-$VERSION/utils/pdftotext .
+#ln -s ../vendor/poppler/poppler-$VERSION/utils/pdfinfo .
+
+echo "-----> Cleaning up cache directory"
+cd $CACHE_DIR
+cd "poppler-${VERSION}"
+make clean
