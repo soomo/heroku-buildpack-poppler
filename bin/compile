@@ -50,7 +50,7 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
 fi
 
 echo "-----> Extracting Poppler binaries"
-mkdir -p $BUILD_DIR/vendor/poppler/utils
+mkdir -p $BUILD_DIR/vendor/poppler/poppler-$VERSION/utils
 cp -f $CACHE_DIR/poppler-$VERSION/keep/pdftops $BUILD_DIR/vendor/poppler/poppler-$VERSION/utils/pdftops
 
 echo "-----> Linking binaries"
