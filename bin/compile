@@ -5,12 +5,16 @@ set -e
 BUILD_DIR=$1
 CACHE_DIR=$2
 
+mkdir -p $CACHE_DIR
+if [ -e $CACHE_DIR/poppler-heroku-stack ]; then
+  PREVIOUS_STACK=`cat $CACHE_DIR/poppler-heroku-stack`
+fi
+
 # Fontconfig
 FONTCONFIG_VERSION="2.10.2"
 FILE_NAME="fontconfig-${FONTCONFIG_VERSION}.tar.gz"
 
-mkdir -p $CACHE_DIR
-if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
+if ! [ -e $CACHE_DIR/$FILE_NAME && $STACK == $PREVIOUS_STACK ]; then
   echo "-----> building Fontconfig buildpack binaries"
   cd $CACHE_DIR
   echo $CACHE_DIR/$FILE_NAME
@@ -31,8 +35,7 @@ cp -rf "${CACHE_DIR}/fontconfig-${FONTCONFIG_VERSION}/" $BUILD_DIR/vendor/fontco
 VERSION="0.37.0"
 FILE_NAME="poppler-${VERSION}.tar.xz"
 
-mkdir -p $CACHE_DIR
-if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
+if ! [ -e $CACHE_DIR/$FILE_NAME && $STACK == $PREVIOUS_STACK ]; then
   echo "-----> building Poppler buildpack binaries"
   cd $CACHE_DIR
   echo "https://poppler.freedesktop.org/$FILE_NAME"
@@ -57,3 +60,6 @@ echo "-----> Linking binaries"
 mkdir -p $BUILD_DIR/bin
 cd $BUILD_DIR/bin
 ln -s ../vendor/poppler/poppler-$VERSION/utils/pdftops .
+
+echo "-----> Remembering Heroku stack"
+echo $STACK > $CACHE_DIR/poppler-heroku-stack
